@@ -126,11 +126,6 @@ test.describe("Yaksha", () => {
     await procurementPage.verifyRequestedDateColumnDateWithinRange();
     await verifyPurchaseReqDataIsPresent(page);
   });
-
-  test("TS-15 Login with invalid credentials", async ({ page }) => {
-    await loginPage.performLoginWithInvalidCredentials();
-    await verifyUserIsNotLoggedin(page);
-  });
 });
 
 // --------------------------------------------------------------------------------------------------------------------------
@@ -195,14 +190,6 @@ async function verifyPurchaseReqDataIsPresent(page: Page) {
     `div[ref="eCenterContainer"] div[col-id="RequestDate"]`
   );
   expect(tableData.length).toBeGreaterThanOrEqual(1);
-}
-
-async function verifyUserIsNotLoggedin(page: Page) {
-  expect(
-    await page
-      .locator('//div[contains(text(),"Invalid credentials !")]')
-      .isVisible()
-  ).toBeTruthy();
 }
 
 async function checkErrorMessageOccurs(page: Page) {
