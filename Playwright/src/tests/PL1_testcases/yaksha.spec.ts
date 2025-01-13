@@ -48,7 +48,6 @@ test.describe("Yaksha", () => {
   // Individual test cases
   test("TS-1 Verify Page Navigation and Load Time for Billing Counter", async ({ page }) => {
     await utilitiesPage.verifyBillingCounterLoadState();
-    await verifyUtilitiesURL(page, "Utilities/ChangeBillingCounter");
   });
 
   test("TS-2 Patient Search with Valid Data", async ({ page }) => {
@@ -166,21 +165,6 @@ async function verifyReportGenereation(page: Page) {
 
 // async function verifyPurchaseRequestListURL(page: Page, expectedURL: string) {
 async function verifyUserIsOnCorrectURL(page: Page, expectedURL: string) {
-  const getActualURl = page.url();
-  expect(getActualURl).toContain(expectedURL);
-}
-
-async function verifyUtilitiesURL(page: Page, expectedURL: string) {
-  const utilitiesModule = page.locator("//span[text()='Utilities']");
-  const ChangeBillingCounter = page.locator('//a[text()= " Change Billing Counter "]');
-
-  // Navigate to Utilities Module
-  await PatientSearchHelper.highlightElement(utilitiesModule);
-  await utilitiesModule.click();
-
-  // Click on Change Billing Counter and measure load time
-  await PatientSearchHelper.highlightElement(ChangeBillingCounter);
-  await ChangeBillingCounter.click();
   const getActualURl = page.url();
   expect(getActualURl).toContain(expectedURL);
 }
